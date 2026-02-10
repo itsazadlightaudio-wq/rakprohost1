@@ -1,9 +1,12 @@
-FROM ghcr.io/lavalink-devs/lavalink:4
+FROM ghcr.io/lavalink-devs/lavalink:4.0.0
+
+# Create app directory
+WORKDIR /opt/Lavalink
 
 # Copy configuration
-COPY application.yml /opt/Lavalink/application.yml
+COPY application.yml ./application.yml
 
-# Expose port
+# Expose Lavalink port
 EXPOSE 2333
 
 # Start Lavalink
