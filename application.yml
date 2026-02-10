@@ -42,7 +42,7 @@ plugins:
     allowDirectPlaylistIds: true
   lavasrc:
     providers:
-      - "ytsearch:%QUERY%"
+      - "ytmsearch:%QUERY%"  
       - "ytmsearch:%QUERY%"
       - "scsearch:%QUERY%"
     sources:
