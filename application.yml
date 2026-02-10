@@ -13,7 +13,7 @@ lavalink:
     # - dependency: "com.dunctebot:skybot-lavalink-plugin:1.7.0"  # INCOMPATIBLE
     # - dependency: "me.duncte123:java-lyrics-plugin:1.6.5"  # INCOMPATIBLE
   server:
-    password: "Rak@1#32178&6"
+    password: "TunixMusicBot123"
     sources:
       youtube: true
       bandcamp: true
