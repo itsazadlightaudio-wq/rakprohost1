@@ -1,75 +1,136 @@
 server:
-  port: 2333
-  address: 0.0.0.0
+    port: 2333
+    address: 0.0.0.0
+    http2:
+        enabled: true
 
 lavalink:
-  server:
-    password: "Rak@1#32178&6"
-    sources:
-      youtube: true
-      bandcamp: true
-      soundcloud: true
-      twitch: true
-      vimeo: true
-      http: true
-      local: false
-    filters:
-      volume: true
-      equalizer: true
-      karaoke: true
-      timescale: true
-      tremolo: true
-      vibrato: true
-      rotation: true
-      distortion: true
-      channelMix: true
-      lowPass: true
-    bufferDurationMs: 400
-    frameBufferDurationMs: 5000
-    youtubePlaylistLoadLimit: 6
-    playerUpdateInterval: 5
-    youtubeSearchEnabled: true
-    soundcloudSearchEnabled: true
-    gc-warnings: true
+    plugins:
+        - dependency: "dev.lavalink.youtube:youtube-plugin:1.12.0"
+        - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.2.0"
+        - dependency: "com.github.topi314.lavasearch:lavasearch-plugin:1.0.0"
+        - dependency: "com.github.topi314.lavalyrics:lavalyrics-plugin:1.0.0"
+        - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
+        - dependency: "com.dunctebot:skybot-lavalink-plugin:1.7.0"
+        - dependency: "me.duncte123:java-lyrics-plugin:1.6.5"
+    server:
+        password: "Rak@1#32178&6"
+        sources:
+            youtube: false
+            bandcamp: true
+            soundcloud: true
+            twitch: true
+            vimeo: true
+            nico: true
+            http: true
+            local: true
+        filters:
+            volume: true
+            equalizer: true
+            karaoke: true
+            timescale: true
+            tremolo: true
+            vibrato: true
+            distortion: true
+            rotation: true
+            channelMix: true
+            lowPass: true
+        bufferDurationMs: 400
+        frameBufferDurationMs: 5000
+        opusEncodingQuality: 10
+        resamplingQuality: LOW
+        trackStuckThresholdMs: 10000
+        useSeekGhosting: true
+        youtubePlaylistLoadLimit: 6
+        playerUpdateInterval: 5
+        youtubeSearchEnabled: true
+        soundcloudSearchEnabled: true
+        gc-warnings: true
 
 plugins:
-  lavasrc:
-    providers:
-      - "dzis:2"
-      - "ytmsearch:2"
-      - "spsearch:2"
-      - "scsearch:2"
-      - "ytsearch:2"
-      - "dzsearch:2"
-    sources:
-      youtube: true
-      bandcamp: true
-      soundcloud: true
-      twitch: true
-      vimeo: true
-      http: true
-      local: false
-    spotify:
-      clientId: ""
-      clientSecret: ""
-      countryCode: "US"
-      playlistLoadLimit: 6
-      albumLoadLimit: 6
-      searchLimit: 10
-      audioOnly: false
+    youtube:
+        enabled: true
+        oauth:
+            enabled: false
+        allowSearch: true
+        allowDirectVideoIds: true
+        allowDirectPlaylistIds: true
+        clients:
+            - MUSIC
+            - ANDROID_VR
+            - WEB
+            - WEBEMBEDDED
+            - MWEB
+            - IOS
+            - ANDROID
+            - TV
+            - TVHTML5EMBEDDED
+    lavasrc:
+        providers:
+            - "ytsearch:%QUERY%"
+            - "ytmsearch:%QUERY%"
+            - "scsearch:%QUERY%"
+            - "spsearch:%QUERY%"
+        sources:
+            spotify: true
+            applemusic: true
+            youtube: true
+            deezer: false
+            yandexmusic: false
+            vkmusic: false
+            tidal: false
+        lyrics-sources:
+            spotify: true
+            deezer: false
+            youtube: true
+        spotify:
+            clientId: ""
+            clientSecret: ""
+            countryCode: "US"
+            playlistLoadLimit: 6
+            albumLoadLimit: 6
+        applemusic:
+            countryCode: "US"
+            playlistLoadLimit: 6
+            albumLoadLimit: 6
+    lavalyrics:
+        sources:
+            - spotify
+            - youtube
+    dunctebot:
+        ttsLanguage: "en-US"
+        sources:
+            getyarn: true
+            clypit: true
+            tts: true
+            reddit: true
+            tiktok: true
+            mixcloud: true
+    lyrics:
+        countryCode: "US"
 
 metrics:
-  prometheus:
-    enabled: false
-    endpoint: /metrics
+    prometheus:
+        enabled: false
+        endpoint: /metrics
 
 sentry:
-  dsn: ""
-  environment: ""
+    dsn: ""
+    environment: ""
 
 logging:
-  file:
-    path: ./logs/
-  level:
-    root: INFO
-    lavalink: INFO
+    file:
+        path: ./logs/
+    level:
+        root: INFO
+        lavalink: INFO
+    request:
+        enabled: true
+        includeClientInfo: true
+        includeQueryString: true
+        includePayload: true
+        maxPayloadLength: 10000
+    logback:
+        rollingpolicy:
+            max-file-size: 1GB
+            max-history: 30
